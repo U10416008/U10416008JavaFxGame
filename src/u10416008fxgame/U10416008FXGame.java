@@ -132,6 +132,7 @@ public class U10416008FXGame extends Application {
         escFight = new Timeline(
                 new KeyFrame(Duration.millis(3000), e -> {paintMap(); }));
         Scene scene = new Scene(pane , 500 ,300);
+        
         scene.setOnKeyPressed(e -> {
             //not fighting
             if(fighting == false){
@@ -214,8 +215,12 @@ public class U10416008FXGame extends Application {
             //get the location that mouse clicked
             System.out.println(e.getX()+ "," + e.getY());
         });
+        
         primaryStage.setTitle("Game");
         primaryStage.setScene(scene);
+        primaryStage.setHeight(328);
+        primaryStage.setWidth(500);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
@@ -483,9 +488,10 @@ public class U10416008FXGame extends Application {
                     dx = 0;
                 }
             }
-           
-            
-            
+            if(roadToBoss == true &&imageMove.getX() >= 255&& imageMove.getY()<=90){
+                dxTB = 0;
+                dyTB = 0;
+            }
             if(imageMove.getX() >= 480){
                 
                 dy = 0;
@@ -537,7 +543,10 @@ public class U10416008FXGame extends Application {
                     dx = 0;
                 }
             }
-           
+            if(roadToBoss == true &&imageMove.getX() <= 225&& imageMove.getY()<=90){
+                dxTB = 0;
+                dyTB = 0;
+            }
             if((imageMove.getX() <= 200 && imageMove.getY() < 5)
                     || (imageMove.getX() <= 250 && imageMove.getY() > 225)){
                 dy2 = 0;
