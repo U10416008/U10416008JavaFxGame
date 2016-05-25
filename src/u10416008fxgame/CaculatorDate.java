@@ -10,8 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.*;
 import java.time.*;
 import java.time.temporal.*;
-import java.util.*;
-import javafx.beans.value.*;
 import javafx.scene.text.*;
 import java.security.SecureRandom;
 
@@ -88,33 +86,28 @@ public class CaculatorDate extends Application {
                 });
                 guessCorrect.setStyle("-fx-stroke: #3278fa;-fx-text-fill: RED;-fx-font-size: 54;");
                 
-		cB.getSelectionModel().selectedIndexProperty().addListener(
-                        new ChangeListener<Number>(){
-                            @Override
-                            public void changed(ObservableValue ov,Number value,Number new_value){
-                                if(new_value.intValue() == 0){
-                                    if(vb.getChildren().contains(guessDay) == true){
-                                        vb.getChildren().removeAll(hb2,guessDay,guessCorrect,compute);
-                                    }
-                                    if(vb.getChildren().contains(minus) == false){
-                                        vb.getChildren().addAll(hb,minus, minusDate, minus2 ,minusDay,compute);
-                                    }
-                                    
-                                    compute.setText("計算");
-                                }
-                                if(new_value.intValue() == 1){
-                                    if(vb.getChildren().contains(minus) == true){
-                                        vb.getChildren().removeAll(hb,minus, minusDate, minus2 ,minusDay,compute);   
-                                    }
-                                    if(vb.getChildren().contains(guessDay) == false){
-                                        vb.getChildren().addAll(hb2,guessDay,guessCorrect,compute);
-                                    }
-                                    guessCorrect.setText("");
-                                    compute.setText("猜");
-                                }
-                            }
+		cB.getSelectionModel().selectedIndexProperty().addListener((ov, value, new_value) -> {
+                    if(new_value.intValue() == 0){
+                        if(vb.getChildren().contains(guessDay) == true){
+                            vb.getChildren().removeAll(hb2,guessDay,guessCorrect,compute);
                         }
-                );
+                        if(vb.getChildren().contains(minus) == false){
+                            vb.getChildren().addAll(hb,minus, minusDate, minus2 ,minusDay,compute);
+                        }
+                        
+                        compute.setText("計算");
+                    }
+                    if(new_value.intValue() == 1){
+                        if(vb.getChildren().contains(minus) == true){
+                            vb.getChildren().removeAll(hb,minus, minusDate, minus2 ,minusDay,compute);
+                        }
+                        if(vb.getChildren().contains(guessDay) == false){
+                            vb.getChildren().addAll(hb2,guessDay,guessCorrect,compute);
+                        }
+                        guessCorrect.setText("");
+                        compute.setText("猜");
+                    }
+                });
 		grid.getChildren().addAll(vb);
 		grid.setStyle(
 			"-fx-text-fill: #FFFFFF; -fx-border-color: red; -fx-background-color: WHITE;");    

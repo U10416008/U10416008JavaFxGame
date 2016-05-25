@@ -7,17 +7,13 @@ package u10416008fxgame;
 
 import javafx.application.Application;
 import javafx.animation.*;
-import javafx.event.ActionEvent;
 import javafx.scene.input.*;
-import javafx.event.EventHandler;
 import javafx.scene.*;
-import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.image.*;
 import javafx.scene.text.*;
 import javafx.scene.paint.*;
 import javafx.stage.Stage;
-import javafx.geometry.*;
 import javafx.util.Duration;
 import java.security.SecureRandom;
 
@@ -33,6 +29,7 @@ public class U10416008FXGame extends Application {
     boolean fighting = false;
     boolean imageChange = false;
     boolean inRoom2 = false ;
+    boolean inRoom3 = false ;
     boolean onSkyStair = false ;
     boolean roadToBoss = false;
     boolean leftBoss = false;
@@ -258,6 +255,13 @@ public class U10416008FXGame extends Application {
                     location.setVisible(false);                
                     inRoom2 = true ;
                 }
+                if(imageMove.getX() <= 180 && imageMove.getX() >= 175 && imageMove.getY() <= 235 && imageMove.getY() >= 225){
+                    map.paintRoom3();
+                    inTown = false;
+                    imageMove.setVisible(false);
+                    location.setVisible(false);  
+                    inRoom3 = true ;
+                }
                 if((imageMove.getX() > 35 && imageMove.getX() < 200 && imageMove.getY() == 115) 
                     || (imageMove.getX() > 275 && imageMove.getX() < 440 && imageMove.getY() == 115)
                     || (imageMove.getX() >= 50 && imageMove.getX() <= 250 && imageMove.getY() == 15)
@@ -370,6 +374,15 @@ public class U10416008FXGame extends Application {
                 location.setVisible(true);
                 inRoom2 = false;
                 
+            }
+            if(inRoom3 == true ){
+                map.paintTown();
+                inTown = true;
+                imageMove.setX(180);
+                imageMove.setY(230);
+                imageMove.setVisible(true);
+                location.setVisible(true);
+                inRoom3 = false;
             }
             
             

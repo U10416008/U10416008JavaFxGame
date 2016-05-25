@@ -11,19 +11,16 @@ package u10416008fxgame;
  */
 
 import javafx.animation.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.image.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
-import javafx.geometry.*;
 import javafx.scene.paint.Color;
 import javafx.util.*;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+
 
 public class Map extends Pane {
     boolean moveFinish = false;
@@ -45,6 +42,8 @@ public class Map extends Pane {
     int dx = 2;
     final int Loser = 15;
     public Map(){
+        setStyle("-fx-background-color: black");
+        setPrefSize(500,300);
         star.setFont(Font.font("Courier",FontWeight.BOLD,FontPosture.REGULAR,20));
         star.setFill(Color.RED);
     }
@@ -318,4 +317,11 @@ public class Map extends Pane {
     public void setLeaveFight(){
         letFight.setText("逃跑囉~~~");
     }
+    public void paintRoom3(){
+        Room3 r3 = new Room3();
+        Stage secondStage = new Stage();
+        r3.start(secondStage);
+        getChildren().clear();        
+    }
+    
 }
