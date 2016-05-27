@@ -19,6 +19,8 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
@@ -69,14 +71,19 @@ public class Room3 extends Application{
         
         
         Room3Ob rb = new Room3Ob();
+        Room3Ch ch = new Room3Ch();
         Box floor = new Box(300,30,300);
         floor.setLayoutY(65);
         floor.setTranslateZ(-150);
         floor.setMaterial(material2);      
-        MeshView mesh =new MeshView(rb);
-        mesh.setMaterial(material2);
-        mesh.setLayoutY(-180);
-        mesh.setTranslateZ(-150);
+        MeshView churchM =new MeshView(ch);
+        churchM.setMaterial(material2);
+        churchM.setLayoutY(-80);
+        //churchM.setTranslateZ(-150);
+        MeshView ceiling =new MeshView(rb);
+        ceiling.setMaterial(material2);
+        ceiling.setLayoutY(-180);
+        ceiling.setTranslateZ(-150);
         Cylinder pillar[] = new Cylinder[20];
         for(int i = 0; i < 10 ; i++){
             pillar[i] = new Cylinder (5 ,100);
@@ -90,34 +97,50 @@ public class Room3 extends Application{
             pillar[i].setLayoutX( -125 );
             pillar[i].setTranslateZ(-15-30 * ( i - 10));
         }
-        Group group = new Group();
-        group.getChildren().addAll(floor);
-        group.getChildren().addAll(pillar);
-        group.getChildren().addAll(mesh);
-        group.setLayoutX(250);
-        group.setLayoutY(50);
-        group.setOnMouseEntered(e ->{
-            group.setTranslateZ(group.getTranslateZ()-100);
+        Group shrine = new Group();
+        shrine.getChildren().addAll(floor);
+        shrine.getChildren().addAll(pillar);
+        shrine.getChildren().addAll(ceiling);
+        shrine.setLayoutX(350);
+        shrine.setLayoutY(50);
+        Group church = new Group(churchM);
+        church.setLayoutX(-350);
+        church.setLayoutY(50);
+        shrine.setOnMouseEntered(e ->{
+            shrine.setTranslateZ(shrine.getTranslateZ()-100);
         });
-        group.setOnMouseExited(e ->{
-            group.setTranslateZ(group.getTranslateZ()+100);
+        shrine.setOnMouseExited(e ->{
+            shrine.setTranslateZ(shrine.getTranslateZ()+100);
         });
-        group.setOnMousePressed(e ->{
-            shrine(mesh,floor,pillar);
+        shrine.setOnMousePressed(e ->{
+            shrine(ceiling,floor,pillar);
+        });
+        church.setOnMouseEntered(e ->{
+            church.setTranslateZ(church.getTranslateZ()-100);
+        });
+        church.setOnMouseExited(e ->{
+            church.setTranslateZ(church.getTranslateZ()+100);
+        });
+        church.setOnMousePressed(e ->{
+            church(churchM);
         });
         Rotate rz = new Rotate(0.0, Rotate.Z_AXIS);
-        Rotate ry = new Rotate(20.0, Rotate.Y_AXIS);
+        Rotate ry = new Rotate(40.0, Rotate.Y_AXIS);
         Rotate rx = new Rotate(0.0, Rotate.X_AXIS);
+        Rotate cz = new Rotate(0.0, Rotate.Z_AXIS);
+        Rotate cy = new Rotate(-75.0, Rotate.Y_AXIS);
+        Rotate cx = new Rotate(0.0, Rotate.X_AXIS);
         camera.setNearClip(0.1);
         camera.setFarClip(10000.0); 
         camera.setTranslateZ(-1500);
-        group.getTransforms().addAll(rx,ry,rz);
+        shrine.getTransforms().addAll(rx,ry,rz);
+        church.getTransforms().addAll(cx,cy,cz);
         pane.getChildren().clear();
-        pane.getChildren().addAll(group);
+        pane.getChildren().addAll(shrine,church);
         
     }
     public void shrine(MeshView mesh,Box floor,Cylinder pillar[]){
-        Button returnRoom = new Button("返回");
+        Button returnRoom = new Button();
         returnRoom.setPrefSize(100, 50);
         returnRoom.setLayoutX(-350);
         returnRoom.setLayoutY(-150);
@@ -134,6 +157,24 @@ public class Room3 extends Application{
         group.getChildren().addAll(floor,mesh);
         group.getChildren().addAll(pillar);
         group.setLayoutY(50);
+        pane.getChildren().addAll(group,returnRoom);
+    }
+    public void church(MeshView mesh){
+        Button returnRoom = new Button();
+        returnRoom.setPrefSize(100, 50);
+        returnRoom.setLayoutX(-350);
+        returnRoom.setLayoutY(-150);
+        returnRoom.setOnAction(e ->{
+            room3();
+        });
+        Group group = new Group();
+        Rotate rz = new Rotate(0.0, Rotate.Z_AXIS);
+        Rotate ry = new Rotate(-60.0, Rotate.Y_AXIS);
+        Rotate rx = new Rotate(0.0, Rotate.X_AXIS);
+        group.getTransforms().addAll(rx,ry,rz);
+        group.getChildren().addAll(mesh);
+        pane.getChildren().clear();
+        camera.setTranslateZ(-800);
         pane.getChildren().addAll(group,returnRoom);
     }
 }

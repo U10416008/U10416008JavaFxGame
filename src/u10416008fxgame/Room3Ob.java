@@ -20,10 +20,7 @@ public class Room3Ob extends TriangleMesh{
         paint();
     }
     public void paint(){
-        PhongMaterial material1 = new PhongMaterial();
-        material1.setDiffuseColor(Color.BLUE);
-        material1.setSpecularColor(Color.LIGHTBLUE);
-        material1.setSpecularPower(5.0);
+        
         //height *= .5f;
         float x = 300 ,y =100 , z = 300; 
         float points[] = {
