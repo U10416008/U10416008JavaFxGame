@@ -1,8 +1,6 @@
 package u10416008fxgame;
 
 
-import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.TriangleMesh;
 
 /*
@@ -22,7 +20,7 @@ public class Room3Ch extends TriangleMesh{
     public void paint(){
         
         
-        int divisions = 180;
+        int divisions = 120;
         final int nPoints = divisions*(divisions) + 1;
 
         float points[] = new float[(nPoints+ divisions) * 3];

@@ -5,8 +5,6 @@
  */
 package u10416008fxgame;
 
-import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.TriangleMesh;
 
 /**
@@ -21,7 +19,6 @@ public class Room3Ob extends TriangleMesh{
     }
     public void paint(){
         
-        //height *= .5f;
         float x = 300 ,y =100 , z = 300; 
         float points[] = {
             0, 0, 0,
@@ -55,13 +52,6 @@ public class Room3Ob extends TriangleMesh{
             6,0, 8,0, 7,0
             
         };
-       
-
-        // Faces
-
-
-        // build cap faces
-      
 
         int smoothing[] = {};
 

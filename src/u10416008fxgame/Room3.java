@@ -19,8 +19,6 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
@@ -67,21 +65,20 @@ public class Room3 extends Application{
         material1.setSpecularColor(Color.WHITE);
         material1.setSpecularPower(2.0);
         PhongMaterial material2 = new PhongMaterial();
-        material2.setDiffuseColor(Color.LIGHTGREY);
-        
+        material2.setDiffuseColor(Color.LIGHTSKYBLUE);
+        material1.setSpecularColor(Color.WHITE);
         
         Room3Ob rb = new Room3Ob();
         Room3Ch ch = new Room3Ch();
         Box floor = new Box(300,30,300);
         floor.setLayoutY(65);
         floor.setTranslateZ(-150);
-        floor.setMaterial(material2);      
+        floor.setMaterial(material1);      
         MeshView churchM =new MeshView(ch);
         churchM.setMaterial(material2);
         churchM.setLayoutY(-80);
-        //churchM.setTranslateZ(-150);
         MeshView ceiling =new MeshView(rb);
-        ceiling.setMaterial(material2);
+        ceiling.setMaterial(material1);
         ceiling.setLayoutY(-180);
         ceiling.setTranslateZ(-150);
         Cylinder pillar[] = new Cylinder[20];
@@ -140,11 +137,17 @@ public class Room3 extends Application{
         
     }
     public void shrine(MeshView mesh,Box floor,Cylinder pillar[]){
-        Button returnRoom = new Button();
-        returnRoom.setPrefSize(100, 50);
-        returnRoom.setLayoutX(-350);
-        returnRoom.setLayoutY(-150);
-        returnRoom.setOnAction(e ->{
+        Room3Ar ar = new Room3Ar();
+        MeshView arrow = new MeshView(ar);
+        arrow.setLayoutX(-250);
+        arrow.setLayoutY(-150);
+        arrow.setOnMouseEntered(e ->{
+            arrow.setTranslateZ(arrow.getTranslateZ()-10);
+        });
+        arrow.setOnMouseExited(e ->{
+            arrow.setTranslateZ(arrow.getTranslateZ()+10);
+        });
+        arrow.setOnMousePressed(e ->{
             room3();
         });
         Group group = new Group();
@@ -157,14 +160,20 @@ public class Room3 extends Application{
         group.getChildren().addAll(floor,mesh);
         group.getChildren().addAll(pillar);
         group.setLayoutY(50);
-        pane.getChildren().addAll(group,returnRoom);
+        pane.getChildren().addAll(group,arrow);
     }
     public void church(MeshView mesh){
-        Button returnRoom = new Button();
-        returnRoom.setPrefSize(100, 50);
-        returnRoom.setLayoutX(-350);
-        returnRoom.setLayoutY(-150);
-        returnRoom.setOnAction(e ->{
+        Room3Ar ar = new Room3Ar();
+        MeshView arrow = new MeshView(ar);
+        arrow.setLayoutX(-250);
+        arrow.setLayoutY(-150);
+        arrow.setOnMouseEntered(e ->{
+            arrow.setTranslateZ(arrow.getTranslateZ()-10);
+        });
+        arrow.setOnMouseExited(e ->{
+            arrow.setTranslateZ(arrow.getTranslateZ()+10);
+        });
+        arrow.setOnMousePressed(e ->{
             room3();
         });
         Group group = new Group();
@@ -175,6 +184,6 @@ public class Room3 extends Application{
         group.getChildren().addAll(mesh);
         pane.getChildren().clear();
         camera.setTranslateZ(-800);
-        pane.getChildren().addAll(group,returnRoom);
+        pane.getChildren().addAll(group,arrow);
     }
 }
