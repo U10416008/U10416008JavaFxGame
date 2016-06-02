@@ -32,7 +32,7 @@ public class Room3Ob extends TriangleMesh{
             x/2, y+30 , z/2    
     
         };
-        float texcoords[] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+        float texcoords[] = {0,0};
 
         int faces[] = {
             

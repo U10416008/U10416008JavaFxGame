@@ -79,20 +79,8 @@ public class Room3Ch extends TriangleMesh{
         points[po +2] = 0;
         
         
-        float texcoords[] = new float[2*((divisions+1)*divisions + 1+divisions)];
-        int t = 0;
-        for(int i = 0; i < divisions;i++){
-            for(int j = 0 ; j < divisions-1;j++){
-                texcoords[t] = 0;
-                texcoords[t+1] = 0;
-                t= t+2;
-            }
-        }
-        for(int i = 0 ; i < divisions ; i++){
-            texcoords[t] = 0;
-            texcoords[t+1] = 0;
-            t= t+2;
-        }
+        float texcoords[] = {0,0};
+        
         int k = 0;
         int faces[] = new int[6*(2*divisions*(divisions) + divisions +divisions)];
         for(int i = 0 ; i< divisions-1 ;i++){
