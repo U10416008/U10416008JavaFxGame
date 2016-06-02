@@ -6,13 +6,11 @@
 package u10416008fxgame;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.MeshView;
@@ -28,11 +26,31 @@ public class ArrowGame extends Pane {
     SecureRandom direction = new SecureRandom();
     Group group = new Group();
     int score = 0 ;
+    int speed = 2;
+    int create = 500;
     MeshView arM[] = new MeshView[4];
     Timeline arC;
     Timeline arD;
     public ArrowGame(){
+        
+    }
+    public ArrowGame(int level){
         setStyle("-fx-background-color : transparent");
+        paint();
+        switch (level) {
+            case 0:
+                speed = 2;
+                create = 500;
+                break;
+            case 1:
+                speed = 3;
+                create = 350;
+                break;
+            default:
+                speed = 5;
+                create = 250;
+                break;
+        }
     }
     public void paint(){
         Room3Ar arrow[] = new Room3Ar[4];
@@ -57,12 +75,12 @@ public class ArrowGame extends Pane {
     public void play(){
         
         ParallelTransition arCD = new ParallelTransition();
-        arC = new Timeline(new KeyFrame(Duration.millis(500), e -> {
+        arC = new Timeline(new KeyFrame(Duration.millis(create), e -> {
             group.getChildren().add(new MeshView(new Room3Ar()));
-            group.getChildren().get(group.getChildren().size()-1).setLayoutY(-200);
+            group.getChildren().get(group.getChildren().size()-1).setLayoutY(-300);
             int direct = direction.nextInt(4);
             if(direct == 3){
-                group.getChildren().get(group.getChildren().size()-1).setLayoutY(-170);
+                group.getChildren().get(group.getChildren().size()-1).setLayoutY(-270);
             }
             Rotate rz = new Rotate(90*direct,Rotate.Z_AXIS);
             group.getChildren().get(group.getChildren().size()-1).setLayoutX(-150 + 100*direct);
@@ -83,7 +101,7 @@ public class ArrowGame extends Pane {
         for(Node node: group.getChildren()){
             
                 MeshView ar = (MeshView)node;
-                ar.setLayoutY(ar.getLayoutY()+2);              
+                ar.setLayoutY(ar.getLayoutY()+speed);              
                 
         }
     }

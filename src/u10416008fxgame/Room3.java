@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -139,21 +140,46 @@ public class Room3 extends Application{
         
     }
     public void shrine(MeshView mesh,Box floor,Cylinder pillar[]){
+        PhongMaterial material1 = new PhongMaterial();
+        material1.setDiffuseColor(Color.RED);
+        material1.setSpecularColor(Color.CORAL);
+        PhongMaterial material2 = new PhongMaterial();
+        material2.setDiffuseColor(Color.DARKBLUE);
+        material2.setSpecularColor(Color.LIGHTBLUE);
         Room3Ar ar = new Room3Ar();
         MeshView arrow = new MeshView(ar);
         arrow.setLayoutX(-300);
         arrow.setLayoutY(-150);
-        Room3Ar arIn = new Room3Ar();
-        MeshView arrowIn = new MeshView(arIn);
-        arrowIn.setTranslateZ(-300);
-        arrowIn.setLayoutY(25);
+        Room3Ar arIn[] = new Room3Ar[3];
+        MeshView arrowIn[] = new MeshView[3];
+        Rotate az = new Rotate(90.0, Rotate.Z_AXIS);
+        Rotate ax = new Rotate(60.0, Rotate.X_AXIS);
+        for(int i = 0 ; i < 3 ; i++){
+            arIn[i] = new Room3Ar();
+            arrowIn[i] = new MeshView(arIn[i]);
+            arrowIn[i].setTranslateZ(-300);
+            arrowIn[i].setLayoutY(25);
+            arrowIn[i].setLayoutX(-50+50*i);
+            arrowIn[i].getTransforms().addAll(ax,az);
+            
+        }
+        arrowIn[1].setMaterial(material1);
+        arrowIn[2].setMaterial(material2);
+        arrowIn[0].setOnMousePressed(e ->{
+                toPlayArrow(0);
+        });
+        arrowIn[1].setOnMousePressed(e ->{
+                toPlayArrow(1);
+        });
+        arrowIn[2].setOnMousePressed(e ->{
+                toPlayArrow(2);
+        });
         Group group = new Group();
         Rotate rz = new Rotate(0.0, Rotate.Z_AXIS);
         Rotate ry = new Rotate(0.0, Rotate.Y_AXIS);
         Rotate rx = new Rotate(0.0, Rotate.X_AXIS);
-        Rotate az = new Rotate(90.0, Rotate.Z_AXIS);
-        Rotate ax = new Rotate(60.0, Rotate.X_AXIS);
-        arrowIn.getTransforms().addAll(ax,az);
+        
+        
         RotateTransition rt = new RotateTransition(Duration.millis(3000), arrow);
         rt.setAxis(Rotate.X_AXIS);
         rt.setFromAngle(0);
@@ -175,16 +201,15 @@ public class Room3 extends Application{
         arrow.setOnMousePressed(e ->{
             room3();
         });
-        arrowIn.setOnMousePressed(e ->{
-            toPlayArrow();
-        });
+        
         group.getTransforms().addAll(rx,ry,rz);
         pane.getChildren().clear();
         camera.setTranslateZ(-800);
         group.getChildren().addAll(floor,mesh);
         group.getChildren().addAll(pillar);
         group.setLayoutY(50);
-        pane.getChildren().addAll(group,arrow,arrowIn);
+        pane.getChildren().addAll(group,arrow);
+        pane.getChildren().addAll(arrowIn);
     }
     public void church(MeshView mesh){
         Room3Ar ar = new Room3Ar();
@@ -222,12 +247,14 @@ public class Room3 extends Application{
         camera.setTranslateZ(-850);
         pane.getChildren().addAll(group,arrow);
     }
-    public void toPlayArrow(){
-        ArrowGame ag = new ArrowGame();
-        ag.paint();
+    public void toPlayArrow(int level){
+        ArrowGame ag = new ArrowGame(level);
         scene.setRoot(ag);
         scene.setOnKeyPressed(e ->{
             ag.control(e.getCode());
+            if(e.getCode() == KeyCode.ESCAPE){
+                scene.setRoot(pane);
+            }
         });
     }
 }
