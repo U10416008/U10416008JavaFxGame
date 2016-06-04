@@ -253,6 +253,7 @@ public class Room3 extends Application{
         scene.setOnKeyPressed(e ->{
             ag.control(e.getCode());
             if(e.getCode() == KeyCode.ESCAPE){
+                ag.stop();
                 scene.setRoot(pane);
             }
         });

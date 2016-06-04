@@ -29,8 +29,11 @@ public class ArrowGame extends Pane {
     int speed = 2;
     int create = 500;
     MeshView arM[] = new MeshView[4];
+    ParallelTransition arCD = new ParallelTransition();
     Timeline arC;
     Timeline arD;
+    Timeline rank;
+    int createTimes = 0;
     public ArrowGame(){
         
     }
@@ -51,6 +54,11 @@ public class ArrowGame extends Pane {
                 create = 250;
                 break;
         }
+        rank = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
+            stop();
+            rank(score);
+        }));
+        rank.setCycleCount(1);
     }
     public void paint(){
         Room3Ar arrow[] = new Room3Ar[4];
@@ -74,7 +82,7 @@ public class ArrowGame extends Pane {
     }
     public void play(){
         
-        ParallelTransition arCD = new ParallelTransition();
+        
         arC = new Timeline(new KeyFrame(Duration.millis(create), e -> {
             group.getChildren().add(new MeshView(new Room3Ar()));
             group.getChildren().get(group.getChildren().size()-1).setLayoutY(-300);
@@ -85,6 +93,7 @@ public class ArrowGame extends Pane {
             Rotate rz = new Rotate(90*direct,Rotate.Z_AXIS);
             group.getChildren().get(group.getChildren().size()-1).setLayoutX(-150 + 100*direct);
             group.getChildren().get(group.getChildren().size()-1).getTransforms().addAll(rz);
+            createTimes++;
         }));
         arC.setCycleCount(100);
         arD = new Timeline(new KeyFrame(Duration.millis(10), e -> {
@@ -126,32 +135,48 @@ public class ArrowGame extends Pane {
             i = 3;
         }
         for(Node node: group.getChildren()){
-                MeshView ar = (MeshView)node;
-                if(ar.getLayoutX() == arM[i].getLayoutX()){
-                    if(ar.getLayoutY() >= arM[i].getLayoutY()-s10 &&ar.getLayoutY() <= arM[i].getLayoutY()+s10){
-                        ar.setVisible(false);
-                        score += 10;
-                    }
-                    else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s8 &&ar.getLayoutY() <= arM[i].getLayoutY()+s8){
-                        ar.setVisible(false);
-                        score += 8;
-                    }
-                    else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s6 &&ar.getLayoutY() <= arM[i].getLayoutY()+s6){
-                        ar.setVisible(false);
-                        score += 6;
-                    }
-                    else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s4 &&ar.getLayoutY() <= arM[i].getLayoutY()+s4){
-                        ar.setVisible(false);
-                        score += 4;
-                    }
-                    else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s2 &&ar.getLayoutY() <= arM[i].getLayoutY()+s2){
-                        ar.setVisible(false);
-                        score += 2;
-                    }
+            MeshView ar = (MeshView)node;
+            if(ar.getLayoutX() == arM[i].getLayoutX()){
+                if(ar.getLayoutY() >= arM[i].getLayoutY()-s10 &&ar.getLayoutY() <= arM[i].getLayoutY()+s10){
+                    ar.setVisible(false);
+                    score += 10;
                 }
-                
+                else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s8 &&ar.getLayoutY() <= arM[i].getLayoutY()+s8){
+                    ar.setVisible(false);
+                    score += 8;
+                }
+                else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s6 &&ar.getLayoutY() <= arM[i].getLayoutY()+s6){
+                    ar.setVisible(false);
+                    score += 6;
+                }
+                else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s4 &&ar.getLayoutY() <= arM[i].getLayoutY()+s4){
+                    ar.setVisible(false);
+                    score += 4;
+                }
+                else if(ar.getLayoutX() == arM[i].getLayoutX()&& ar.getLayoutY() >= arM[i].getLayoutY()-s2 &&ar.getLayoutY() <= arM[i].getLayoutY()+s2){
+                    ar.setVisible(false);
+                    score += 2;
+                }
             }
-        System.out.println(score);
+                
+        }
+        if(createTimes == 100){
+            
+            rank.play();
+        }
         
+    }
+    public void stop(){
+        arCD.stop();
+    }
+    public void rank(int score){
+        Room3S S = new Room3S();
+        MeshView finalRank = new MeshView();
+        if(score >= 900){
+            S.paintS();
+            finalRank.setMesh(S);
+            getChildren().clear();
+            getChildren().addAll(finalRank);
+        }
     }
 }
