@@ -39,7 +39,7 @@ public class ArrowGame extends Pane {
     }
     public ArrowGame(int level){
         setStyle("-fx-background-color : transparent");
-        paint();
+        
         switch (level) {
             case 0:
                 speed = 2;
@@ -54,11 +54,33 @@ public class ArrowGame extends Pane {
                 create = 250;
                 break;
         }
+        
+        arC = new Timeline(new KeyFrame(Duration.millis(create), e -> {
+            group.getChildren().add(new MeshView(new Room3Ar()));
+            group.getChildren().get(group.getChildren().size()-1).setLayoutY(-300);
+            int direct = direction.nextInt(4);
+            if(direct == 3){
+                group.getChildren().get(group.getChildren().size()-1).setLayoutY(-270);
+            }
+            Rotate rz = new Rotate(90*direct,Rotate.Z_AXIS);
+            group.getChildren().get(group.getChildren().size()-1).setLayoutX(-150 + 100*direct);
+            group.getChildren().get(group.getChildren().size()-1).getTransforms().addAll(rz);
+            createTimes++;
+        }));
+        arC.setCycleCount(100);
+        arD = new Timeline(new KeyFrame(Duration.millis(10), e -> {
+            move();
+        }));
+        arD.setCycleCount(Timeline.INDEFINITE);
+        arCD.getChildren().addAll(arD,arC);
+        arCD.setCycleCount(1);
+        paint();
         rank = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
             stop();
-            rank(score);
+            rank();
         }));
         rank.setCycleCount(1);
+        
     }
     public void paint(){
         Room3Ar arrow[] = new Room3Ar[4];
@@ -81,27 +103,7 @@ public class ArrowGame extends Pane {
         
     }
     public void play(){
-        
-        
-        arC = new Timeline(new KeyFrame(Duration.millis(create), e -> {
-            group.getChildren().add(new MeshView(new Room3Ar()));
-            group.getChildren().get(group.getChildren().size()-1).setLayoutY(-300);
-            int direct = direction.nextInt(4);
-            if(direct == 3){
-                group.getChildren().get(group.getChildren().size()-1).setLayoutY(-270);
-            }
-            Rotate rz = new Rotate(90*direct,Rotate.Z_AXIS);
-            group.getChildren().get(group.getChildren().size()-1).setLayoutX(-150 + 100*direct);
-            group.getChildren().get(group.getChildren().size()-1).getTransforms().addAll(rz);
-            createTimes++;
-        }));
-        arC.setCycleCount(100);
-        arD = new Timeline(new KeyFrame(Duration.millis(10), e -> {
-            move();
-        }));
-        arD.setCycleCount(Timeline.INDEFINITE);
-        arCD.getChildren().addAll(arD,arC);
-        arCD.setCycleCount(1);
+
         arCD.play();
         getChildren().addAll(group);
         
@@ -169,14 +171,32 @@ public class ArrowGame extends Pane {
     public void stop(){
         arCD.stop();
     }
-    public void rank(int score){
+    public void rank(){
         Room3S S = new Room3S();
-        MeshView finalRank = new MeshView();
+        Room3Ar arrow = new Room3Ar();
+        getChildren().clear();
         if(score >= 900){
             S.paintS();
-            finalRank.setMesh(S);
-            getChildren().clear();
+            MeshView finalRank = new MeshView(S);
+            getChildren().addAll(finalRank);
+        }else if(score >= 800){
+            S.paintA();
+            MeshView finalRank = new MeshView(S);
+            finalRank.setLayoutY(-50);
+            getChildren().addAll(finalRank);
+        }else if(score >= 600){
+            S.paintC();
+            MeshView finalRank = new MeshView(S);
             getChildren().addAll(finalRank);
         }
+        MeshView arrowReturn = new MeshView(arrow);
+        arrowReturn.setLayoutX(-300);
+        arrowReturn.setLayoutY(-150);
+        arrowReturn.setOnMousePressed(e ->{
+            createTimes = 0;
+            this.score = 0;
+            paint();
+        });
+        getChildren().addAll(arrowReturn);
     }
 }
