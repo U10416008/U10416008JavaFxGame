@@ -22,10 +22,12 @@ public class Room3S extends TriangleMesh{
         float point[] = new float[3*divisions*8];
         int k = 0;
         for(int i = 0; i < divisions; i++){
+            
             point[k] = (float)(R*Math.cos(3f/4f/(divisions-1) * i  * 2*Math.PI));
             point[k+1] = -R - (float)(R*Math.sin((3f/4f/(divisions-1)) * 2 * Math.PI * i));
             point[k+2] = 0;
             k = k+3;
+            
             point[k] = (float)(r*Math.cos((3f/4f/(divisions-1)) * 2 * Math.PI * i));
             point[k+1] = -R - (float)(r*Math.sin((3f/4f/(divisions-1)) * 2 * Math.PI * i));
             point[k+2] = 0;
@@ -33,10 +35,12 @@ public class Room3S extends TriangleMesh{
             
         }
         for(int i = 1; i < divisions; i++){
+            
             point[k] = (float)(r*Math.cos((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ));
             point[k+1] = -(float)(r*Math.sin((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ))+r;
             point[k+2] = 0;
             k = k+3;
+            
             point[k] = (float)(R*Math.cos((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ));
             point[k+1] = -(float)(R*Math.sin((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ))+r;
             point[k+2] = 0;
@@ -44,24 +48,28 @@ public class Room3S extends TriangleMesh{
             
         }
         for(int i = 0; i < divisions; i++){
+            
             point[k] = (float)(R*Math.cos((3f/4f/(divisions-1)) * 2 * Math.PI * i));
             point[k+1] = -R - (float)(R*Math.sin((3f/4f/(divisions-1)) * 2 * Math.PI * i));
-            point[k+2] = 30;
+            point[k+2] = 50;
             k = k+3;
+            
             point[k] = (float)(r*Math.cos((3f/4f/(divisions-1)) * 2 * Math.PI * i));
             point[k+1] = -R - (float)(r*Math.sin((3f/4f/(divisions-1)) * 2 * Math.PI * i));
-            point[k+2] = 30;
+            point[k+2] = 50;
             k = k+3;
             
         }
         for(int i = 1; i < divisions; i++){
+            
             point[k] = (float)(r*Math.cos((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ));
             point[k+1] = -(float)(r*Math.sin((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ))+r;
-            point[k+2] = 30;
+            point[k+2] = 50;
             k = k+3;
+            
             point[k] = (float)(R*Math.cos((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ));
             point[k+1] = -(float)(R*Math.sin((1f/4f - (3f/4f/(divisions-1))* i) * 2 * Math.PI ))+r;
-            point[k+2] = 30;
+            point[k+2] = 50;
             k = k+3;
             
         }
@@ -150,6 +158,7 @@ public class Room3S extends TriangleMesh{
         faces[f+4] = 299;
         faces[f+5] = 0;
         f = f+6;
+        
         faces[f] = 296;
         faces[f+1] = 0;
         faces[f+2] = 594;
@@ -189,17 +198,17 @@ public class Room3S extends TriangleMesh{
             -1.5f*w,  h-w,  0,
              1.5f*w,  h-w,  0,
              2.5f*w,  h-w,  0,
-                  0,    0, 30,
-               -w/2,   -w, 30,
-                w/2,   -w, 30,
-               -w/2,    w, 30,
-                w/2,    w, 30,
-                 -w,  2*w, 30,
-                  w,  2*w, 30,
-            -2.5f*w,  h-w, 30,
-            -1.5f*w,  h-w, 30,
-             1.5f*w,  h-w, 30,
-             2.5f*w,  h-w, 30
+                  0,    0, 50,
+               -w/2,   -w, 50,
+                w/2,   -w, 50,
+               -w/2,    w, 50,
+                w/2,    w, 50,
+                 -w,  2*w, 50,
+                  w,  2*w, 50,
+            -2.5f*w,  h-w, 50,
+            -1.5f*w,  h-w, 50,
+             1.5f*w,  h-w, 50,
+             2.5f*w,  h-w, 50
             
         };
         float tex[] = {0,0};
@@ -256,23 +265,27 @@ public class Room3S extends TriangleMesh{
         int k = 0;
         float point[] = new float[4*(divisions+1)*3];
         for(int i = 0; i <= divisions ; i++){
+            
             point[k] = (float)(R*Math.cos((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
-            point[k+1] = (float)(R*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
+            point[k+1] = -(float)(R*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
             point[k+2] = 0;
             k = k+3;
+            
             point[k] = (float)(r*Math.cos((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
-            point[k+1] = (float)(r*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
+            point[k+1] = -(float)(r*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
             point[k+2] = 0;
             k = k+3;
         }
         for(int i = 0; i <= divisions ; i++){
+            
             point[k] = (float)(R*Math.cos((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
-            point[k+1] = (float)(R*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
-            point[k+2] = 20;
+            point[k+1] = -(float)(R*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
+            point[k+2] = 50;
             k = k+3;
+            
             point[k] = (float)(r*Math.cos((1f/12f + 10f/12f/divisions * i)* 2 * Math.PI ));
-            point[k+1] = (float)(r*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
-            point[k+2] = 20;
+            point[k+1] = -(float)(r*Math.sin((1f/12f + 10f/12f/divisions * i) * 2 * Math.PI ));
+            point[k+2] = 50;
             k = k+3;
         }
         float tex[] = {0,0};
@@ -369,6 +382,169 @@ public class Room3S extends TriangleMesh{
         faces[f+4] = 403;
         faces[f+5] = 0;
         f = f+6;
+        
+        getPoints().clear();
+        getTexCoords().clear();
+        getFaces().clear();
+        getPoints().addAll(point);
+        getTexCoords().addAll(tex);
+        getFaces().addAll(faces);
+    }
+    public void paintD(){
+        float r = 100;
+        float R = 200;
+        int divisions = 50 ;
+        float point[] = new float[3*(4*(divisions+1)+4)];
+        int k = 0;
+        for(int i = 0 ; i <= divisions ; i++){
+            
+            point[k] = (float)(r*Math.cos((1f/4f - 1f/2f/divisions*i)*2*Math.PI));
+            point[k+1] = -(float)(r*Math.sin((1f/4f - 1f/2f/divisions*i)*2*Math.PI));
+            point[k+2] = 0;
+            k = k+3;
+            
+            point[k] = (float)(R*Math.cos((1f/3f - 2f/3f/divisions*i)*2*Math.PI));
+            point[k+1] = -(float)(R*Math.sin((1f/3f - 2f/3f/divisions*i)*2*Math.PI));
+            point[k+2] = 0;
+            k = k+3;
+        }
+        for(int i = 0 ; i <= divisions ; i++){
+            
+            point[k] = (float)(r*Math.cos((1f/4f - 1f/2f/divisions*i)*2*Math.PI));
+            point[k+1] = -(float)(r*Math.sin((1f/4f - 1f/2f/divisions*i)*2*Math.PI));
+            point[k+2] = 50;
+            k = k+3;
+            
+            point[k] = (float)(R*Math.cos((1f/3f - 2f/3f/divisions*i)*2*Math.PI));
+            point[k+1] = -(float)(R*Math.sin((1f/3f - 2f/3f/divisions*i)*2*Math.PI));
+            point[k+2] = 50;
+            k = k+3;
+        }
+        
+        float tex[] = {0,0};
+        int p = 0;
+        int faces[] = new int[(divisions*4  + 6)*12];
+        for(int i = 0; i<2*divisions ; i = i+2){
+            faces[p] = i;
+            faces[p+1] = 0;
+            faces[p+2] = i+2;
+            faces[p+3] = 0;
+            faces[p+4] = i+1;
+            faces[p+5] = 0;
+            p = p+6;
+            faces[p] = i+1;
+            faces[p+1] = 0;
+            faces[p+2] = i+2;
+            faces[p+3] = 0;
+            faces[p+4] = i+3;
+            faces[p+5] = 0;
+            p = p+6;
+            
+            faces[p] = i;
+            faces[p+1] = 0;
+            faces[p+2] = i+102;
+            faces[p+3] = 0;
+            faces[p+4] = i+104;
+            faces[p+5] = 0;
+            p = p+6;
+            faces[p] = i;
+            faces[p+1] = 0;
+            faces[p+2] = i+104;
+            faces[p+3] = 0;
+            faces[p+4] = i+2;
+            faces[p+5] = 0;
+            p = p+6;
+            
+            faces[p] = i+102;
+            faces[p+1] = 0;
+            faces[p+2] = i+103;
+            faces[p+3] = 0;
+            faces[p+4] = i+104;
+            faces[p+5] = 0;
+            p = p+6;
+            faces[p] = i+104;
+            faces[p+1] = 0;
+            faces[p+2] = i+103;
+            faces[p+3] = 0;
+            faces[p+4] = i+105;
+            faces[p+5] = 0;
+            p = p+6;
+            
+            faces[p] = i+1;
+            faces[p+1] = 0;
+            faces[p+2] = i+3;
+            faces[p+3] = 0;
+            faces[p+4] = i+103;
+            faces[p+5] = 0;
+            p = p+6;
+            faces[p] = i+3;
+            faces[p+1] = 0;
+            faces[p+2] = i+105;
+            faces[p+3] = 0;
+            faces[p+4] = i+103;
+            faces[p+5] = 0;
+            p = p+6;
+        }
+        faces[p] = 0;
+        faces[p+1] = 0;
+        faces[p+2] = 100;
+        faces[p+3] = 0;
+        faces[p+4] = 102;
+        faces[p+5] = 0;
+        p = p+6;
+        faces[p] = 100;
+        faces[p+1] = 0;
+        faces[p+2] = 202;
+        faces[p+3] = 0;
+        faces[p+4] = 102;
+        faces[p+5] = 0;
+        p = p+6;
+        
+        faces[p] = 1;
+        faces[p+1] = 0;
+        faces[p+2] = 103;
+        faces[p+3] = 0;
+        faces[p+4] = 101;
+        faces[p+5] = 0;
+        p = p+6;
+        faces[p] = 103;
+        faces[p+1] = 0;
+        faces[p+2] = 203;
+        faces[p+3] = 0;
+        faces[p+4] = 101;
+        faces[p+5] = 0;
+        p = p+6;
+        
+        faces[p] = 0;
+        faces[p+1] = 0;
+        faces[p+2] = 1;
+        faces[p+3] = 0;
+        faces[p+4] = 100;
+        faces[p+5] = 0;
+        p = p+6;
+        faces[p] = 1;
+        faces[p+1] = 0;
+        faces[p+2] = 101;
+        faces[p+3] = 0;
+        faces[p+4] = 100;
+        faces[p+5] = 0;
+        p = p+6;
+        
+        faces[p] = 102;
+        faces[p+1] = 0;
+        faces[p+2] = 202;
+        faces[p+3] = 0;
+        faces[p+4] = 103;
+        faces[p+5] = 0;
+        p = p+6;
+        faces[p] = 103;
+        faces[p+1] = 0;
+        faces[p+2] = 202;
+        faces[p+3] = 0;
+        faces[p+4] = 203;
+        faces[p+5] = 0;
+        p = p+6;
+        
         getPoints().clear();
         getTexCoords().clear();
         getFaces().clear();

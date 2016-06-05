@@ -8,6 +8,7 @@ package u10416008fxgame;
 import java.security.SecureRandom;
 import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -174,20 +175,26 @@ public class ArrowGame extends Pane {
     public void rank(){
         Room3S S = new Room3S();
         Room3Ar arrow = new Room3Ar();
+        MeshView finalRank = new MeshView();
         getChildren().clear();
+        
         if(score >= 900){
             S.paintS();
-            MeshView finalRank = new MeshView(S);
-            getChildren().addAll(finalRank);
+            finalRank = new MeshView(S);
+            
         }else if(score >= 800){
             S.paintA();
-            MeshView finalRank = new MeshView(S);
+            finalRank = new MeshView(S);
             finalRank.setLayoutY(-50);
-            getChildren().addAll(finalRank);
+            
         }else if(score >= 600){
             S.paintC();
-            MeshView finalRank = new MeshView(S);
-            getChildren().addAll(finalRank);
+            finalRank = new MeshView(S);
+            
+        }else if(score >= 500){
+            S.paintD();
+            finalRank = new MeshView(S);
+            
         }
         MeshView arrowReturn = new MeshView(arrow);
         arrowReturn.setLayoutX(-300);
@@ -197,6 +204,12 @@ public class ArrowGame extends Pane {
             this.score = 0;
             paint();
         });
-        getChildren().addAll(arrowReturn);
+        getChildren().addAll(finalRank,arrowReturn);
+        RotateTransition rt = new RotateTransition(Duration.millis(500), finalRank);
+        rt.setAxis(Rotate.Y_AXIS);
+        rt.setFromAngle(0);
+        rt.setToAngle(360);
+        rt.setCycleCount(5);
+        rt.play();
     }
 }
