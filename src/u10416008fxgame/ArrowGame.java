@@ -177,24 +177,39 @@ public class ArrowGame extends Pane {
         Room3Ar arrow = new Room3Ar();
         MeshView finalRank = new MeshView();
         getChildren().clear();
-        
+        int duration = 500;
+        int cycle = 5;
         if(score >= 900){
             S.paintS();
             finalRank = new MeshView(S);
+            duration = 250;
+            cycle = 10;
             
         }else if(score >= 800){
             S.paintA();
             finalRank = new MeshView(S);
             finalRank.setLayoutY(-50);
+            duration = 300;
+            cycle = 8;
             
         }else if(score >= 600){
             S.paintC();
             finalRank = new MeshView(S);
+            duration = 400;
+            cycle = 6;
             
         }else if(score >= 500){
             S.paintD();
             finalRank = new MeshView(S);
-            
+            duration = 500;
+            cycle = 5;
+        }else{
+            S.paintF();
+            finalRank = new MeshView(S);
+            finalRank.setLayoutX(-120);
+            finalRank.setLayoutY(200);
+            duration = 2500;
+            cycle = 1;
         }
         MeshView arrowReturn = new MeshView(arrow);
         arrowReturn.setLayoutX(-300);
@@ -205,11 +220,11 @@ public class ArrowGame extends Pane {
             paint();
         });
         getChildren().addAll(finalRank,arrowReturn);
-        RotateTransition rt = new RotateTransition(Duration.millis(500), finalRank);
+        RotateTransition rt = new RotateTransition(Duration.millis(duration), finalRank);
         rt.setAxis(Rotate.Y_AXIS);
         rt.setFromAngle(0);
         rt.setToAngle(360);
-        rt.setCycleCount(5);
+        rt.setCycleCount(cycle);
         rt.play();
     }
 }
